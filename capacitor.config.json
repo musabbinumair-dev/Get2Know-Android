@@ -1,0 +1,12 @@
+{
+  "appId": "com.get2know.app",
+  "appName": "Get-to-Know-You",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#FAF6EA",
+    "allowMixedContent": true
+  }
+}

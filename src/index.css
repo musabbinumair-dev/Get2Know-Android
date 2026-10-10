@@ -1,0 +1,368 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,400;0,500;0,600;0,700;0,800;0,900;1,700;1,900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --u: min(calc(100vw / 390), calc(100dvh / 844));
+  --bg-cream: #F8F1E1;
+  --color-ink: #1b1d22;
+  --color-muted-gray: #8A8A93;
+  --font-heading: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.home-shell {
+  --u: min(calc(min(100vw, 430px) / 390), calc(100dvh / 844));
+  --hero-avatar-w: 30%;
+  --quick-gap: calc(10 * var(--u));
+  --heading-size: clamp(28px, calc(40 * var(--u)), 44px);
+  --spacer-top: clamp(8px, 1.8dvh, 20px);
+  --spacer-card: clamp(8px, 1.8dvh, 18px);
+  --spacer-quick: clamp(8px, 1.8dvh, 18px);
+  --spacer-pill: clamp(6px, 1.4dvh, 16px);
+}
+
+@supports (container-type: size) {
+  .home-shell {
+    container-type: size;
+    --u: min(calc(100cqw / 390), calc(100cqh / 844));
+  }
+}
+
+@media (max-height: 700px) {
+  .home-shell {
+    --hero-avatar-w: 26%;
+    --spacer-top: 6px;
+    --spacer-card: 6px;
+    --spacer-quick: 6px;
+    --spacer-pill: 5px;
+  }
+  .hide-on-compact {
+    display: none !important;
+  }
+}
+
+@media (min-height: 880px) {
+  .home-shell {
+    --spacer-top: clamp(14px, 2.5dvh, 28px);
+    --spacer-card: clamp(14px, 2.6dvh, 30px);
+    --spacer-quick: clamp(12px, 2.4dvh, 26px);
+    --spacer-pill: clamp(10px, 2dvh, 24px);
+  }
+}
+
+@media (max-width: 340px) {
+  .home-shell {
+    --heading-size: calc(36 * var(--u));
+    --quick-gap: calc(6 * var(--u));
+  }
+}
+
+@media (min-width: 431px) {
+  .home-shell {
+    border-radius: 32px;
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: var(--bg-cream);
+  color: var(--color-ink);
+  font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  width: 100%;
+  height: 100%;
+  min-height: 100dvh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Headings: Nunito Extra Bold / Black */
+h1, h2, h3, h4, h5, h6, .font-heading {
+  font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  font-weight: 900;
+}
+
+/* Body texts & inputs: Nunito */
+p, span, input, textarea, label, button, .font-body {
+  font-family: 'Nunito', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Subtle bounce for pressable elements */
+.btn-press {
+  transition: transform 0.15s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.15s ease;
+}
+
+.btn-press:active {
+  transform: scale(0.97);
+}
+
+@keyframes pop-in {
+  0% {
+    transform: scale(0.88);
+    opacity: 0.5;
+  }
+  65% {
+    transform: scale(1.04);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-pop {
+  animation: pop-in 0.22s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes avatar-bounce {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08) translateY(-4px); }
+}
+
+.animate-avatar-bounce {
+  animation: avatar-bounce 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Instagram-style emoji reaction float, tilt & eruption keyframes */
+@keyframes ig-particle-float {
+  0% {
+    opacity: 0;
+    transform: translate3d(var(--x, 0px), 60px, 0) rotate(var(--rot, 0deg)) scale(0.9);
+  }
+  8% {
+    opacity: 1;
+    transform: translate3d(calc(var(--x, 0px) + var(--drift, 0px) * 0.12 + 14px), -12vh, 0) rotate(calc(var(--rot, 0deg) + 6deg)) scale(1);
+  }
+  35% {
+    opacity: 1;
+    transform: translate3d(calc(var(--x, 0px) + var(--drift, 0px) * 0.4 - 18px), -42vh, 0) rotate(calc(var(--rot, 0deg) - 6deg)) scale(1.08);
+  }
+  70% {
+    opacity: 1;
+    transform: translate3d(calc(var(--x, 0px) + var(--drift, 0px) * 0.75 + 16px), -78vh, 0) rotate(calc(var(--rot, 0deg) + 12deg)) scale(1.18);
+  }
+  100% {
+    opacity: 0;
+    transform: translate3d(calc(var(--x, 0px) + var(--drift, 0px)), calc(-100vh - 120px), 0) rotate(calc(var(--rot, 0deg) + 24deg)) scale(1.26);
+  }
+}
+
+.ig-reaction-particle {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  display: inline-block;
+  font-size: var(--size, 36px);
+  line-height: 1;
+  pointer-events: none;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
+  touch-action: none;
+  will-change: transform, opacity;
+  animation: ig-particle-float var(--dur, 2.8s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ig-reaction-particle {
+    animation-duration: 1.2s !important;
+  }
+}
+
+@keyframes ig-tap-tilt {
+  0% {
+    transform: scale(1) rotate(0deg);
+  }
+  25% {
+    transform: scale(1.35) translateY(-6px) rotate(-14deg);
+  }
+  50% {
+    transform: scale(1.22) translateY(-3px) rotate(10deg);
+  }
+  75% {
+    transform: scale(1.12) translateY(-1px) rotate(-4deg);
+  }
+  100% {
+    transform: scale(1) translateY(0) rotate(0deg);
+  }
+}
+
+.animate-ig-tap-tilt {
+  animation: ig-tap-tilt 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* Scrollbar hide utility */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* Modal Slide & Fade Animations */
+@keyframes slide-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0.8;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-in {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes fade-out {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.animate-slideUp {
+  animation: slide-up 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-slideDown {
+  animation: slide-down 0.24s cubic-bezier(0.7, 0, 0.84, 0) forwards;
+}
+
+.animate-fadeIn {
+  animation: fade-in 0.25s ease-out forwards;
+}
+
+.animate-fadeOut {
+  animation: fade-out 0.22s ease-in forwards;
+}
+
+/* ── APP LOADER MOTION SPECIFICATIONS ── */
+@keyframes loaderFadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes loaderRingSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes dotWaveBounce {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  25% {
+    transform: translateY(-10px);
+  }
+  50% {
+    transform: translateY(0px);
+  }
+  75% {
+    transform: translateY(10px);
+  }
+}
+
+/* ── TRIVIA QUESTION SCREEN: TALL VS COMPACT RESPONSIVE SWITCH ── */
+.trivia-tall-stage {
+  display: flex;
+}
+.trivia-compact-stage {
+  display: none;
+}
+.trivia-tall-decorations {
+  display: block;
+}
+.trivia-compact-decorations {
+  display: none;
+}
+
+/* Mobile only (width below 768px):
+   Tall layout: aspect (height/width) 1.9 or more AND height 760px or more.
+   Compact layout: viewport aspect ratio (height / width) below 1.9, OR viewport height below 760px.
+*/
+@media (max-width: 767.98px) {
+  /* Default for mobile below 768px is Compact layout */
+  .trivia-tall-stage {
+    display: none;
+  }
+  .trivia-compact-stage {
+    display: flex;
+  }
+  .trivia-tall-decorations {
+    display: none;
+  }
+  .trivia-compact-decorations {
+    display: block;
+  }
+}
+
+/* Tall layout on mobile: height 760px or more AND aspect (height/width) 1.9 or more
+   In CSS aspect-ratio (width/height), height/width >= 1.9 is max-aspect-ratio: 10/19 (~0.5263)
+*/
+@media (max-width: 767.98px) and (min-height: 760px) and (max-aspect-ratio: 10/19) {
+  .trivia-tall-stage {
+    display: flex !important;
+  }
+  .trivia-compact-stage {
+    display: none !important;
+  }
+  .trivia-tall-decorations {
+    display: block !important;
+  }
+  .trivia-compact-decorations {
+    display: none !important;
+  }
+}
+
+/* Short viewport safety: hide only the bottom decorations to prevent overlap */
+@media (max-height: 560px) {
+  .trivia-bottom-deco {
+    display: none !important;
+  }
+}
+
