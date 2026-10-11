@@ -1,0 +1,7 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">Get-to-Know-You</string>
+    <string name="title_activity_main">Get-to-Know-You</string>
+    <string name="package_name">com.get2know.app</string>
+    <string name="custom_url_scheme">com.get2know.app</string>
+</resources>
