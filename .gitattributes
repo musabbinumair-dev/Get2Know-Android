@@ -1,0 +1,5 @@
+# Ensure binary files are treated as binary by git
+*.jar binary
+*.png binary
+*.webp binary
+*.apk binary

@@ -6,8 +6,8 @@
   "scripts": {
     "dev": "vite --host 0.0.0.0 --port 3000",
     "build": "tsc && vite build",
-    "build:android": "tsc && vite build && npx cap sync android",
-    "sync:android": "npx cap sync android",
+    "build:android": "tsc && vite build && cap sync android",
+    "sync:android": "cap sync android",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
